@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigación: Redes LoRa y LoRaWAN</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.5);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        h2 {
+            color: var(--accent);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #334155;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-glow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .class-card {
+            background-color: #0f172a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Preguntas sobre las Redes LoRa</h1>
+        <p>Alumno: Rene Olivares</p>
+        <p>Docente: Ana Laura</p>
+    </header>
+
+    <div class="container">
+        <!-- Sección 1: CSS y Alcance -->
+        <section class="card">
+            <h2>1. CSS (Chirp Spread Spectrum)</h2>
+            <h2>Cómo LoRa logra inmunidad al ruido y un gran alcance?</h2>
+            <p>La tecnología LoRa utiliza una técnica de modulación patentada llamada <span class="highlight">Chirp Spread Spectrum (CSS)</span>. Funciona enviando pulsos (chirps) cuya frecuencia aumenta o disminuye progresivamente a lo largo del tiempo.</p>
+            <ul>
+                <li><strong>Inmunidad al ruido:</strong> Al utilizar estos patrones de barrido de frecuencia, el receptor puede distinguir la señal de LoRa incluso cuando esta se encuentra por debajo del nivel de ruido de fondo (SNR negativo). Es como reconocer una melodía de silbido específica en medio de una habitación ruidosa.</li>
+                <li><strong>Gran alcance:</strong> Se logra gracias a un ancho de banda relativamente bajo y un presupuesto de enlace (Link Budget) muy alto. Esto permite que la señal viaje decenas de kilómetros en áreas rurales sin disiparse por completo.</li>
+            </ul>
+        </section>
+
+        <!-- Sección 2: Arquitectura y Diferencias -->
+        <section class="card">
+            <h2>2.Arquitectura LoRaWAN</h2>
+            <h2>Cuál es la diferencia entre LoRa y LoRaWAN?</h2>
+            <ul>
+                <li><strong>LoRa:</strong> Es la capa física (Radiofrecuencia). Es la forma en que las ondas electromagnéticas se transmiten por el aire.</li>
+                <li><strong>LoRaWAN:</strong> Es la capa de control de acceso al medio (MAC). Es el protocolo de red y la arquitectura del sistema que dicta cómo se comunican los dispositivos, cómo se asegura la red y cómo se enrutan los datos.</li>
+            </ul>
+            
+            <h3>Arquitectura de la Red</h3>
+            <p>El ecosistema funciona con una topología de "estrella de estrellas":</p>
+            <ol>
+                <li><strong>Nodos Finales (Sensores):</strong> Dispositivos que recopilan datos y los envían vía LoRa.</li>
+                <li><strong>Gateways (Pasarelas):</strong> Actúan como puentes transparentes. Reciben las ondas de radio de los nodos y las reenvían a Internet mediante conexiones IP estándar (Wi-Fi, Ethernet, 4G).</li>
+                <li><strong>Network Server:</strong> El cerebro de la red. Elimina mensajes duplicados (si varios gateways escucharon el mismo sensor), gestiona la seguridad y controla la velocidad de los datos.</li>
+                <li><strong>Application Server:</strong> El destino final donde los datos se descifran, se procesan y se muestran al usuario final.</li>
+            </ol>
+        </section>
+
+        <!-- Sección 3: Clases de Dispositivos -->
+        <section class="card">
+            <h2>3. Clases de Dispositivos: Energía vs Latencia</h2>
+            <h2>Cuándo priorizar ahorro de energia frente a latencia de bajada?</h2>
+            <p>LoRaWAN define tres clases de dispositivos para adaptarse a diferentes necesidades, equilibrando siempre el consumo de batería y la rapidez con la que el dispositivo puede recibir órdenes de la red (latencia de bajada).</p>
+            
+            <div class="grid">
+                <div class="class-card">
+                    <h3 style="margin-top: 0;">Clase A (Battery Powered)</h3>
+                    <p><strong>Prioridad:</strong> Máximo ahorro de energía.</p>
+                    <p>El dispositivo duerme casi todo el tiempo. Solo abre dos breves "ventanas de escucha" inmediatamente después de enviar un mensaje. Si la red quiere decirle algo, debe esperar a que el sensor hable primero.</p>
+                </div>
+                <div class="class-card">
+                    <h3 style="margin-top: 0;">Clase B (Beacon)</h3>
+                    <p><strong>Prioridad:</strong> Equilibrio.</p>
+                    <p>Además de las ventanas de la Clase A, abre ventanas de escucha programadas a intervalos regulares. Requiere sincronizarse con el Gateway usando balizas (beacons). Gasta más batería que la Clase A.</p>
+                </div>
+                <div class="class-card">
+                    <h3 style="margin-top: 0;">Clase C (Continuous)</h3>
+                    <p><strong>Prioridad:</strong> Mínima latencia de bajada.</p>
+                    <p>El dispositivo está escuchando continuamente. Si la red le envía un mensaje, lo recibe al instante. Debido al alto consumo, estos dispositivos suelen estar conectados a la red eléctrica continua.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Investigación realizada para la clase de Redes y Telecomunicaciones.</p>
+        <p><strong>Autor:</strong> [Tu Nombre Aquí]</p>
+    </footer>
+
+</body>
+</html>
